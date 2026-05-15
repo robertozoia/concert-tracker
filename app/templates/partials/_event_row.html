@@ -1,0 +1,26 @@
+{# Shared compact event row.
+   Context vars:
+     event           — Event ORM object
+     show_full_date  — bool. True for the flat search view; False for column rows.
+#}
+{% set d = event.event_date %}
+<li class="event-row{% if show_full_date %} event-row--wide{% endif %}">
+  <div class="date">
+    {% if show_full_date %}
+      <span class="full">{{ d|date_short_es }}</span>
+    {% else %}
+      <span class="dom">{{ "%02d"|format(d.day) }}</span>
+      <span class="dow">{{ d|weekday_abbr_es }}</span>
+    {% endif %}
+  </div>
+  <div class="info" title="{{ event.artist }}{% if event.venue %} — {{ event.venue }}{% endif %}">
+    <span class="artist">{{ event.artist }}</span>
+    {% if event.venue %}<span class="venue">{{ event.venue }}</span>{% endif %}
+  </div>
+  <a class="ticket-link{% if not event.ticket_url %} fallback{% endif %}"
+     href="{{ event.ticket_url or event.songkick_url }}"
+     target="_blank"
+     rel="noopener noreferrer">
+    {% if event.ticket_url %}Entradas{% else %}Songkick{% endif %} →
+  </a>
+</li>

@@ -1,0 +1,20 @@
+{# Single-column flat list for artist-filtered search.
+   Context: events (chronological list), artist, total. #}
+<header class="search-header">
+  <p class="result-count">
+    {% if total == 0 %}
+      Sin coincidencias para “{{ artist }}”.
+    {% else %}
+      {{ total }} concierto{{ '' if total == 1 else 's' }} para “{{ artist }}”
+    {% endif %}
+  </p>
+</header>
+
+{% if events %}
+<ul class="event-rows event-rows--flat">
+  {% set show_full_date = true %}
+  {% for event in events %}
+    {% include "partials/_event_row.html" with context %}
+  {% endfor %}
+</ul>
+{% endif %}

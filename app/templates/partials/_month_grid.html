@@ -1,0 +1,20 @@
+{# Grid of month columns. Context: months (list of {year, month, label, anchor, count, events}). #}
+{% if months %}
+<div class="month-grid">
+  {% for m in months %}
+  <section class="month-column" id="{{ m.anchor }}">
+    <h2 class="month-title">
+      <span>{{ m.label }}</span>
+      <span class="month-count">{{ m.count }}</span>
+    </h2>
+    <ul class="event-rows">
+      {% for event in m.events %}
+        {% include "partials/_event_row.html" with context %}
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">No hay conciertos en este intervalo.</p>
+{% endif %}

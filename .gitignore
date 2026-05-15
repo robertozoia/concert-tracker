@@ -1,0 +1,21 @@
+# Environment
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Data
+data/*.db
+data/*.db-*
+
+# OS
+.DS_Store

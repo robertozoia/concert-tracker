@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-header">
+  <h1>Conciertos · Ciudad de México</h1>
+  <form method="post" action="/logout" class="logout-form">
+    <button type="submit" class="link-button" title="Cerrar sesión">Salir</button>
+  </form>
+</header>
+
+<form class="filters"
+      hx-get="/events"
+      hx-target="#event-list"
+      hx-trigger="input changed delay:300ms from:find input, change from:find input"
+      hx-push-url="true">
+  <label>
+    <span>Artista</span>
+    <input type="search" name="artist" value="{{ artist }}" placeholder="ej. J Balvin" autocomplete="off">
+  </label>
+  <label>
+    <span>Desde</span>
+    <input type="date" name="start" value="{{ start }}">
+  </label>
+  <label>
+    <span>Hasta</span>
+    <input type="date" name="end" value="{{ end }}">
+  </label>
+</form>
+
+{% if not artist and months %}
+<nav class="month-nav" aria-label="Saltar a un mes">
+  <ul>
+    {% for m in months %}
+    <li>
+      <a href="#{{ m.anchor }}">
+        {{ m.label }}<span class="count">{{ m.count }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+<div id="event-list">
+  {% include "partials/event_list.html" %}
+</div>
+{% endblock %}

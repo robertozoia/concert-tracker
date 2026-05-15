@@ -1,0 +1,13 @@
+services:
+  concerts:
+    build: .
+    container_name: concert-tracker
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_PATH: /app/data/concerts.db
+      TZ: America/Mexico_City
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "${LISTEN_PORT:-8090}:8090"

@@ -1,0 +1,7 @@
+{# Top-level event partial. Switches view based on whether the artist filter is set. #}
+{% if artist %}
+  {% include "partials/_flat_list.html" %}
+{% else %}
+  {% set show_full_date = false %}
+  {% include "partials/_month_grid.html" %}
+{% endif %}
