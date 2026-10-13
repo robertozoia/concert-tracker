@@ -10,4 +10,4 @@ services:
     volumes:
       - ./data:/app/data
     ports:
-      - "${LISTEN_PORT:-8090}:8090"
+      - "127.0.0.1:${LISTEN_PORT:-8090}:8090"
